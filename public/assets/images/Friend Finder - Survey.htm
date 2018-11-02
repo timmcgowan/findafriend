@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://localhost:3000/survey -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="find a friend app">
+    <meta name="author" content="Tim McGowan">
+
+    <title>Friend Finder - Survey</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <script src="./Friend Finder - Survey_files/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="./Friend Finder - Survey_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="./Friend Finder - Survey_files/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="./Friend Finder - Survey_files/jquery-ui.js"></script>
+    <link rel="stylesheet" href="./Friend Finder - Survey_files/jquery-ui.css">
+
+    <link rel="stylesheet" href="./Friend Finder - Survey_files/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <!--      
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+
+    <!-- Friend Finder Specific Style & JS -->
+    <link rel="stylesheet" href="./Friend Finder - Survey_files/style.css">
+    <script src="./Friend Finder - Survey_files/survey.js"></script>
+
+    <style>
+        #custom-handle {
+              width: 3em;
+              height: 1.6em;
+              top: 50%;
+              margin-top: -.8em;
+              text-align: center;
+              line-height: 1.6em;
+            }
+            </style>
+
+
+    <script>
+        $(function () {
+            var slideInput;
+            $(".ui-slider-handle").slider({
+                value: 3, min: 1, max: 5, step: 1,
+                slide: function (event, ui) {
+                    var agree = "na";
+                    var slideInput = $(this).attr("data");
+                    console.log(slideInput);
+                    if (ui.value === 1) {
+                        agree = "strongly disagree";
+                    } else if (ui.value === 2) {
+                        agree = "disagree";
+                    } else if (ui.value === 3) {
+                        agree = "neutral";
+                    } else if (ui.value === 4) {
+                        agree = "agree";
+                    } else if (ui.value === 5) {
+                        agree = "strongly agree";
+                    } else {
+                        agree = "blah";
+                    }
+                    $('#' + slideInput).val(agree);
+                }
+            });
+            $("#" + slideInput).attr('for', slideInput).append("$" + $("#slider").slider("value"));
+        });
+    </script>
+    <script>
+        var rangeSlider = function () {
+            var slider = $('.range-slider'),
+                range = $('.range-slider__range'),
+                value = $('.range-slider__value');
+
+            slider.each(function () {
+
+                value.each(function () {
+                    var value = $(this).prev().attr('value');
+                    $(this).html(value);
+                });
+
+                range.on('input', function () {
+                    $(this).next(value).html(this.value);
+                });
+            });
+        };
+
+        rangeSlider();
+    </script>
+    <!-- <script>
+        $( function() {
+          var handle = $( "#bigThinker" );
+          $( "#slider" ).slider({
+            create: function() {
+              handle.text( $( this ).slider( "value" ) );
+            },
+            slide: function( event, ui ) {
+              handle.text( ui.value );
+            }
+          });
+        } );
+        </script> -->
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron">
+            <h1 class="text-center"><i class="fas fa-user-friends"></i> Find a friend!</h1>
+
+            <hr>
+            <h2 class="text-center">Your new friend is waiting to meet you!</h2>
+            <br>
+
+            <div class="text-center">
+                <a href="http://localhost:3000/survey"><button class="btn btn-lg btn-primary"><i class="fas fa-clipboard-list"></i> Take the
+                        Survey!</button></a>
+                <a href="http://localhost:3000/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span></button></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Reservation Page -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Find a Friend Survey</h4>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="photo">Link to Photo</label>
+                                <input type="text" class="form-control" id="photo">
+                            </div>
+                            <hr>
+                            <div class="form-group slidecontainer">
+                                <label for="bigThinker">1) You are constently thinking of new ideas.</label>
+                                <input type="text" id="bigThinker" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="bigThinker" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+
+                                <!-- <div class="range-slider">
+                                        <input id='bigThinker' class="range-slider__range" type="range" value="3" min="1" max="5" step="1">
+                                        <span class="range-slider__value">0</span>
+                                      </div> -->
+
+                            </div>
+                            <div class="form-group slidecontainer">
+                                <label for="creative">2) You consider yourself creative. </label>
+                                <input type="text" id="creative" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="creative" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>3) Your emotions are like a roller coaster </label>
+                                <input type="text" id="emotions" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="emotions" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>4) You eat meat</label>
+                                <input type="text" id="meat" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="meat" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>5) You consider yourself very "spiritual".</label>
+                                <input type="text" id="spiritual" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="spiritual" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>6) You enjoy being around large groups of people</label>
+                                <input type="text" id="lgroups" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="lgroups" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>7) You prefer smaller groups of people.</label>
+                                <input type="text" id="sgroups" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="sgroups" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>8) You enjoy reading books. </label>
+                                <input type="text" id="books" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="books" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>9) You prefer typically prefer movies over the books.</label>
+                                <input type="text" id="movies" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div data="movies" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label>10) What does not kill you, makes you stonger!</label>
+                                <input type="text" id="stalwartness" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                <div>Disagree</div>
+                                <div data="stalwartness" class="ui-slider-handle ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+                                <div>Agree</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit">Submit</button>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p><a href="http://localhost:3000/api/friends">API Table Link</a> | <a href="https://github.com/timmcgowan/FriendFinder">GitHub
+                        Repo</a></p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Display Friend Modal -->
+    <div id="friendModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Match - A potential new friend!</h3>
+                </div>
+                <div class="modal-body">
+                    <h2 id="friendName"></h2>
+                    <img id="friendPhoto" src="./Friend Finder - Survey_files/survey">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body></html>

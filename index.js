@@ -1,15 +1,23 @@
-'use strict';
+// Dependencies
+// =============================================================
+var express = require("express");
+var bodyParser = require("body-parser");
+var path = require("path");
 
-var fs = require('fs');
-var path = require('path');
+// Express config
+// =============================================================
+var app = express();
+var PORT = process.env.PORT || 3000;
 
-exports.get = function(event, context, callback) {
-  var contents = fs.readFileSync(`public${path.sep}index.html`);
-  var result = {
-    statusCode: 200,
-    body: contents.toString(),
-    headers: {'content-type': 'text/html'}
-  };
+// Sets up the Express app to handle data parsing
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-  callback(null, result);
-};
+// Router
+require("./app/routes/apiRoutes")(app);
+require("./app/routes/htmlRoutes")(app);
+
+// listener
+app.listen(PORT, function() {
+    console.log("App listening on PORT: " + PORT);
+  });
